@@ -2,7 +2,10 @@
 
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install -y curl git unzip
+sudo apt install -y curl git unzip flatpak
+# flatpak
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Gum is used for the Omakub commands for tailoring Omakub after the initial install
 cd /tmp
@@ -12,22 +15,19 @@ sudo apt-get install -y ./gum.deb
 rm gum.deb
 cd -
 
-
 # fastfetch
 
 sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
 sudo apt update -y
 sudo apt install -y fastfetch
 
-
 # github cli
 
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg &&
-	sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg &&
-	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null &&
-	sudo apt update &&
-	sudo apt install gh -y
-
+  sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg &&
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null &&
+  sudo apt update &&
+  sudo apt install gh -y
 
 # lazydocker
 cd /tmp
@@ -46,7 +46,6 @@ sudo install lazygit /usr/local/bin
 rm lazygit.tar.gz lazygit
 cd -
 
-
 # neovim
 cd /tmp
 wget -O nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
@@ -56,8 +55,12 @@ sudo cp -R nvim-linux64/lib /usr/local/
 sudo cp -R nvim-linux64/share /usr/local/
 rm -rf nvim-linux64 nvim.tar.gz
 cd -
+# lazyvim
+rm -rf ~/.config/nvim
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
 
-# terminal apps 
+# terminal apps
 sudo apt install -y fzf ripgrep bat eza zoxide plocate btop apache2-utils fd-find tldr
 
 # docker
@@ -65,7 +68,7 @@ sudo apt install -y fzf ripgrep bat eza zoxide plocate btop apache2-utils fd-fin
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo wget -qO /etc/apt/keyrings/docker.asc https://download.docker.com/linux/ubuntu/gpg
 sudo chmod a+r /etc/apt/keyrings/docker.asc
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt update
 
 # Install Docker engine and standard plugins
@@ -76,7 +79,6 @@ sudo usermod -aG docker ${USER}
 
 # Limit log size to avoid running out of disk
 echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | sudo tee /etc/docker/daemon.json
-
 
 # libraries
 sudo apt install -y \
@@ -94,7 +96,6 @@ echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=$(dpkg --pr
 sudo apt update
 sudo apt install -y mise
 
-
 # Set common git aliases
 git config --global alias.co checkout
 git config --global alias.br branch
@@ -109,28 +110,27 @@ mise use --global python@latest
 mise use --global ruby@3.3
 mise x ruby -- gem install rails --no-document
 # nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh  | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 nvm install node
-
 
 # desktop
 
 ## 1password
 # Install 1password and 1password-cli single script
-curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+curl -sS https://downloads.1password.com/linux/keys/1password.asc |
+  sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
 
 # Add apt repository
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
-sudo tee /etc/apt/sources.list.d/1password.list
+  sudo tee /etc/apt/sources.list.d/1password.list
 
 # Add the debsig-verify policy
 sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
-curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
-sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol |
+  sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
 sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
-curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+curl -sS https://downloads.1password.com/linux/keys/1password.asc |
+  sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
 # Install
 ## 1Password & 1password-cli
@@ -138,7 +138,8 @@ sudo apt update && sudo apt install -y 1password 1password-cli
 
 ## audacity
 flatpak install -y flathub org.audacityteam.Audacity
-
+## telegram
+sudo snap install telegram-desktop
 # obs
 sudo apt install -y obs-studio
 
@@ -168,7 +169,6 @@ sudo apt install -y ./localsend.deb
 rm localsend.deb
 cd -
 
-
 # vlc
 sudo apt install -y vlc
 
@@ -192,8 +192,6 @@ rm -rf iafonts.zip iaFonts
 fc-cache
 cd -
 
-
-
 # gnome settings
 # Center new windows in the middle of the screen
 gsettings set org.gnome.mutter center-new-windows true
@@ -203,4 +201,3 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'CaskaydiaMono Ner
 
 # Reveal week numbers in the Gnome calendar
 gsettings set org.gnome.desktop.calendar show-weekdate true
-
