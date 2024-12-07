@@ -196,7 +196,8 @@ sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt update
 sudo apt install -y nextcloud-desktop
 
-
+# npm
+sudo apt install -y npm
 # gnome settings
 # Center new windows in the middle of the screen
 gsettings set org.gnome.mutter center-new-windows true
