@@ -191,6 +191,11 @@ rm -rf iafonts.zip iaFonts
 
 fc-cache
 cd -
+# nextcloud-desktop
+sudo add-apt-repository ppa:nextcloud-devs/client
+sudo apt update
+sudo apt install -y nextcloud-desktop
+
 
 # gnome settings
 # Center new windows in the middle of the screen
