@@ -10,9 +10,9 @@ sudo apt-get install -y git >/dev/null
 echo "Cloning install scripts:"
 rm -rf ~/.local/share/kostja-me-dev
 git clone https://github.com/kostja-me/dev ~/.local/share/kostja-me-dev >/dev/null
-if [[ $KOSTJA_ME_DEV_REF != "master" ]]; then
+if [[ $KOSTJA_ME_DEV_REF != "main" ]]; then
 	cd ~/.local/share/kostja-me-dev
-	git fetch origin "${KOSTJA_ME_DEV_REF:-stable}" && git checkout "${KOSTJA_ME_DEV_REF:-stable}"
+	git fetch origin "${KOSTJA_ME_DEV_REF:-main}" && git checkout "${KOSTJA_ME_DEV_REF:-main}"
 	cd -
 fi
 
