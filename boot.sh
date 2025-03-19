@@ -1,16 +1,5 @@
 set -e
 
-ascii_art = '  _  __                _       _                                
- | |/ /               | |     (_)                               
- | ' /    ___    ___  | |_     _    __ _       _ __ ___     ___ 
- |  <    / _ \  / __| | __|   | |  / _` |     | '_ ` _ \   / _ \
- | . \  | (_) | \__ \ | |_    | | | (_| |  _  | | | | | | |  __/
- |_|\_\  \___/  |___/  \__|   | |  \__,_| (_) |_| |_| |_|  \___|
-                             _/ |                               
-                            |__/                                '
-
-
-echo -e "$ascii_art"
 echo "=> Kostja.me Dev is for use on fresh Ubuntu 24.04 Only"
 echo -e "\nBegin installation (or abort with ctrl+c)..."
 
