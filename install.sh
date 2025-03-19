@@ -10,7 +10,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Gum is used for the Omakub commands for tailoring Omakub after the initial install
 cd /tmp
 GUM_VERSION="0.14.3" # Use known good version
-wget -qO gum.deb "https://github.com/charmbracelet/gum/https://github.com/charmbracelet/gum/releases/download/v${GUM_VERSION}/gum_${GUM_VERSION}_amd64.deb"
+wget -qO gum.deb "https://github.com/charmbracelet/gum/releases/download/v${GUM_VERSION}/gum_${GUM_VERSION}_amd64.deb"
 sudo apt-get install -y ./gum.deb
 rm gum.deb
 cd -
@@ -48,12 +48,12 @@ cd -
 
 # neovim
 cd /tmp
-wget -O nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+wget -O nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz "
 tar -xf nvim.tar.gz
-sudo install nvim-linux64/bin/nvim /usr/local/bin/nvim
-sudo cp -R nvim-linux64/lib /usr/local/
-sudo cp -R nvim-linux64/share /usr/local/
-rm -rf nvim-linux64 nvim.tar.gz
+sudo install nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+sudo cp -R nvim-linux-x86_64/lib /usr/local/
+sudo cp -R nvim-linux-x86_64/share /usr/local/
+rm -rf nvim-linux-x86_64 nvim.tar.gz
 cd -
 # lazyvim
 rm -rf ~/.config/nvim
@@ -110,7 +110,8 @@ mise use --global python@latest
 mise use --global ruby@3.3
 mise x ruby -- gem install rails --no-document
 # nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+source ~/.bashrc
 nvm install node
 
 # desktop
@@ -149,7 +150,7 @@ cd /tmp
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
-xdg-settings set default-web-browser google-chrome.desktop
+# xdg-settings set default-web-browser google-chrome.desktop
 cd -
 
 # Flameshot is a nice step-up over the default Gnome screenshot tool
@@ -192,7 +193,7 @@ rm -rf iafonts.zip iaFonts
 fc-cache
 cd -
 # nextcloud-desktop
-sudo add-apt-repository ppa:nextcloud-devs/client
+sudo add-apt-repository -y ppa:nextcloud-devs/client
 sudo apt update
 sudo apt install -y nextcloud-desktop
 
