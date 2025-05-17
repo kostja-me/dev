@@ -6,10 +6,13 @@ sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https:/
 sudo dnf install -y 1password 1password-cli
 
 # various software
-sudo dnf install -y neovim
+sudo dnf install -y neovim tmux
 sudo dnf install -y nextcloud-client
 sudo dnf install -y dnf-plugins-core
 sudo dnf install -y unrar
+sudo dnf install -y gnome-tweaks gnome-extensions-app
+
+
 
 # pyenv
 sudo dnf install -y make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2
