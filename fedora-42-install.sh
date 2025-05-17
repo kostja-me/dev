@@ -9,15 +9,21 @@ sudo dnf install -y 1password 1password-cli
 sudo dnf install -y neovim tmux
 sudo dnf install -y nextcloud-client
 sudo dnf install -y dnf-plugins-core
-sudo dnf install -y unrar
 sudo dnf install -y gnome-tweaks gnome-extensions-app
 
 
 
 # pyenv
-sudo dnf install -y make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2
+sudo dnf install -y make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2 jq unrar btop htop mc
 curl -fsSL https://pyenv.run | bash || true
 
+# kdenlive
+sudo dnf install -y kdenlive
+# discord
+sudo dnf install -y discord
+
+# MPV media player
+sudo dnf install -y mpv
 
 # docker
 sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
@@ -35,6 +41,8 @@ curl -o /tmp/Hack.zip -L https://github.com/ryanoasis/nerd-fonts/releases/downlo
 unzip -o /tmp/Hack.zip -d ~/.local/share/fonts/
 fc-cache -vf ~/.local/share/fonts/
 
+# tmux tpm  https://github.com/tmux-plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # zsh
 sudo dnf install -y zsh
@@ -44,8 +52,19 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 
 sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
-
-sudo dnf install steam -y
+sudo dnf install -y lutris
+sudo dnf install -y steam
 
 # jetbrains toolbox
 xdg-open https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=linux
+
+# nofications gnome extensions
+xdg-open https://extensions.gnome.org/extension/615/appindicator-support/
+
+# vscode, i hate it but whatever
+
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+
+dnf check-update
+sudo dnf install -y code
