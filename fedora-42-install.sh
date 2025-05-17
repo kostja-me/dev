@@ -34,6 +34,9 @@ sudo systemctl enable --now docker
 # Flatpaks
 sudo flatpak install -y flathub org.telegram.desktop
 sudo flatpak install -y flathub com.viber.Viber
+sudo flatpak install -y flathub com.obsproject.Studio
+sudo flatpak install -y flathub org.audacityteam.Audacity
+
 
 
 # Nerd fonts
