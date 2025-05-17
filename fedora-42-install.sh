@@ -45,7 +45,7 @@ unzip -o /tmp/Hack.zip -d ~/.local/share/fonts/
 fc-cache -vf ~/.local/share/fonts/
 
 # tmux tpm  https://github.com/tmux-plugins/tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 
 # zsh
 sudo dnf install -y zsh
@@ -71,3 +71,16 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 
 dnf check-update
 sudo dnf install -y code
+
+chsh -s $(which zsh)
+
+# aws cli
+sudo dnf install -y awscli2
+# digital ocean cli
+sudo dnf install -y doctl
+
+# kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo mv kubectl /usr/local/bin
+sudo chmod a+x /usr/local/bin/kubectl
+
