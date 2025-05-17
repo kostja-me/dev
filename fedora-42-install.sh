@@ -116,3 +116,5 @@ echo "Setting KB for login screen to en / us"
 # set KB for login screen
 localectl set-keymap en
 localectl set-x11-keymap us
+
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
