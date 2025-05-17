@@ -111,3 +111,8 @@ sudo chmod a+x /usr/local/bin/kubectl
 
 echo "Setting gnome wm preferences button-layout"
 gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
+
+echo "Setting KB for login screen to en / us"
+# set KB for login screen
+localectl set-keymap en
+localectl set-x11-keymap us
