@@ -45,6 +45,11 @@ sudo flatpak install -y flathub com.viber.Viber
 sudo flatpak install -y flathub com.obsproject.Studio
 sudo flatpak install -y flathub org.audacityteam.Audacity
 
+# Some dipshits think Slack is the main tool at most of workplaces
+echo "Installing Slack"
+sudo flatpak install -y flathub com.slack.Slack
+
+
 
 echo "Installing Nerd fonts"
 # Nerd fonts
@@ -105,7 +110,7 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 sudo mv kubectl /usr/local/bin
 sudo chmod a+x /usr/local/bin/kubectl
 
-# TODO: kubectl plugin manager and oidc authentication (or whatever fuck it is called)
+
 echo "Installing Krew, kubectl plugin manager"
 (
   set -x; cd "$(mktemp -d)" &&
@@ -120,8 +125,14 @@ echo "Installing Krew, kubectl plugin manager"
 kubectl krew update
 kubectl krew install oidc-login
 
+echo "Install lazygit"
 
-# TODO: Slack, yeah i hate it, but for some reason companies still use this shit
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -sLo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar -xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+rm lazygit.tar.gz lazygit
+cd ~
 
 
 echo "Setting gnome wm preferences button-layout"
