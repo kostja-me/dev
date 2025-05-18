@@ -57,7 +57,9 @@ gsettings set org.gnome.desktop.interface monospace-font-name "Hack Nerd Font Mo
 
 echo "Installing tpm tmux plugin manager"
 # tmux tpm  https://github.com/tmux-plugins/tpm
+mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
+bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 
 echo "Installing ZSH and oh my zsh"
@@ -104,6 +106,19 @@ sudo mv kubectl /usr/local/bin
 sudo chmod a+x /usr/local/bin/kubectl
 
 # TODO: kubectl plugin manager and oidc authentication (or whatever fuck it is called)
+echo "Installing Krew, kubectl plugin manager"
+(
+  set -x; cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  KREW="krew-${OS}_${ARCH}" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+  tar zxvf "${KREW}.tar.gz" &&
+  ./"${KREW}" install krew
+)
+
+kubectl krew update
+kubectl krew install oidc-login
 
 
 # TODO: Slack, yeah i hate it, but for some reason companies still use this shit
@@ -118,3 +133,6 @@ localectl set-keymap en
 localectl set-x11-keymap us
 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+
+mkdir -p ~/src
