@@ -20,6 +20,14 @@ echo "Installing pyenv"
 sudo dnf install -y make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-libs libnsl2 jq unrar btop htop mc
 curl -fsSL https://pyenv.run | bash || true
 
+echo "Installing NVM"
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+nvm install node
+
 echo "installing kdenlive"
 # kdenlive
 sudo dnf install -y kdenlive
