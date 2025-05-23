@@ -1,11 +1,25 @@
 #!/bin/bash
 set -e
+ASCII_ART=$(cat << 'EOF'
+  _  __                _       _                                
+ | |/ /               | |     (_)                               
+ | ' /    ___    ___  | |_     _    __ _       _ __ ___     ___ 
+ |  <    / _ \  / __| | __|   | |  / _` |     | '_ ` _ \   / _ \
+ | . \  | (_) | \__ \ | |_    | | | (_| |  _  | | | | | | |  __/
+ |_|\_\  \___/  |___/  \__|   | |  \__,_| (_) |_| |_| |_|  \___|
+                             _/ |                               
+                            |__/                                
+EOF)
+
+echo "Installing dev tools"
+sudo dnf group install -y c-development development-tools
 
 echo "Installing 1password"
 # 1Password 
 sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
 sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
 sudo dnf install -y 1password 1password-cli
+sudo dnf install -y gnome-session-xsession mosh
 
 echo "Installing various good software"
 # various software
@@ -44,10 +58,14 @@ echo "Installing Docker"
 # docker
 sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+echo " ** Enabling Docker service"
 sudo systemctl enable --now docker
+echo " ** Adding group docker"
 sudo groupadd docker || true
-sudo usermod -aG docker $USER
-newgrp docker
+echo " ** Adding $USER to the docker group"
+sudo usermod -aG docker $USER || true
+
+# newgrp docker || true
 
 echo "Installing some flatpaks"
 # Flatpaks
@@ -55,6 +73,7 @@ sudo flatpak install -y flathub org.telegram.desktop
 sudo flatpak install -y flathub com.viber.Viber
 sudo flatpak install -y flathub com.obsproject.Studio
 sudo flatpak install -y flathub org.audacityteam.Audacity
+sudo flatpak install -y flathub md.obsidian.Obsidian
 
 # Some dipshits think Slack is the main tool at most of workplaces
 echo "Installing Slack"
@@ -81,7 +100,7 @@ bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 echo "Installing ZSH and oh my zsh"
 # zsh
 sudo dnf install -y zsh
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 
 echo "Installing Steam"
@@ -158,3 +177,6 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 
 mkdir -p ~/src
+
+
+echo "$ASCII_ART"
