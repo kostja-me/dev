@@ -74,6 +74,9 @@ sudo flatpak install -y flathub com.viber.Viber
 sudo flatpak install -y flathub com.obsproject.Studio
 sudo flatpak install -y flathub org.audacityteam.Audacity
 sudo flatpak install -y flathub md.obsidian.Obsidian
+sudo flatpak install -y flathub com.github.tchx84.Flatseal
+sudo flatpak install -y flathub com.github.johnfactotum.Foliate
+
 
 # Some dipshits think Slack is the main tool at most of workplaces
 echo "Installing Slack"
