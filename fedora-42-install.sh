@@ -167,6 +167,8 @@ sudo install lazygit /usr/local/bin
 rm lazygit.tar.gz lazygit
 cd ~
 
+# https://zed.dev/ the best code editor to date
+curl -f https://zed.dev/install.sh | sh
 
 echo "Setting gnome wm preferences button-layout"
 gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
