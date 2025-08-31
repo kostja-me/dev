@@ -178,6 +178,9 @@ localectl set-x11-keymap us
 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
+gsettings set org.gnome.desktop.peripherals.keyboard repeat true
+gsettings set org.gnome.desktop.peripherals.keyboard delay 229
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 21
 
 mkdir -p ~/src
 
