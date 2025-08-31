@@ -152,6 +152,9 @@ echo "Installing Krew, kubectl plugin manager"
   tar zxvf "${KREW}.tar.gz" &&
   ./"${KREW}" install krew
 )
+echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.zshrc
+
 
 kubectl krew update
 kubectl krew install oidc-login
