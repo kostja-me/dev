@@ -46,10 +46,6 @@ echo "installing kdenlive"
 # kdenlive
 sudo dnf install -y kdenlive
 
-echo "Installing Discord"
-# discord
-sudo dnf install -y discord
-
 echo "Installing MPV media player"
 # MPV media player
 sudo dnf install -y mpv
@@ -76,6 +72,7 @@ sudo flatpak install -y flathub org.audacityteam.Audacity
 sudo flatpak install -y flathub md.obsidian.Obsidian
 sudo flatpak install -y flathub com.github.tchx84.Flatseal
 sudo flatpak install -y flathub com.github.johnfactotum.Foliate
+sudo flatpak install -y com.discordapp.Discord
 
 
 # Some dipshits think Slack is the main tool at most of workplaces
