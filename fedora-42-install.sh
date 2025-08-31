@@ -92,6 +92,7 @@ gsettings set org.gnome.desktop.interface monospace-font-name "Hack Nerd Font Mo
 
 echo "Installing tpm tmux plugin manager"
 # tmux tpm  https://github.com/tmux-plugins/tpm
+cp ./home/.tmux.conf ~/.tmux.conf
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
