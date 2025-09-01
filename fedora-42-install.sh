@@ -10,6 +10,8 @@ ASCII_ART=$(cat << 'EOF'
                              _/ |                               
                             |__/                                
 EOF)
+# Updating
+dnf update -y
 
 echo "Installing dev tools"
 sudo dnf group install -y c-development development-tools
@@ -185,6 +187,7 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 gsettings set org.gnome.desktop.peripherals.keyboard delay 229
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 21
 
+bash gnome-backup/restore.sh
 mkdir -p ~/src
 
 

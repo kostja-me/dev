@@ -1,0 +1,8 @@
+[/]
+maximize=@as []
+move-to-monitor-down=@as []
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-monitor-up=@as []
+toggle-fullscreen=['<Super>F11']
+unmaximize=@as []
