@@ -11,7 +11,7 @@ ASCII_ART=$(cat << 'EOF'
                             |__/                                
 EOF)
 # Updating
-dnf update -y
+sudo dnf update -y
 
 echo "Installing dev tools"
 sudo dnf group install -y c-development development-tools
